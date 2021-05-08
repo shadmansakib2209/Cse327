@@ -25,3 +25,6 @@ route::get('/details/{id}','productController@detail');
 route::post('/add_to_cart','productController@addToCart');
 route::get('/cartlist','productController@cartlist');
 route::get('/removecart/{id}','productController@removecartitem');
+route::get('/logout','UserController@logout');
+route::get('/ordernow','productController@ordernow');
+route::post('/orderplace','productController@orderplace');
