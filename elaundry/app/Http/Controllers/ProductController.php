@@ -22,7 +22,41 @@ class ProductController extends Controller
         ->get();
         return view('/myorders',['orders'=>$orders]);
     }
- 
+   function ordernow()
+    
+    {
+        $data=   session()->get('user');
+          $userId=$data->id;
+
+        $total= DB::table('cart')->join('products','cart.product_id','=','products.id')
+        ->where('cart.user_id',$userId)
+        ->select('products.*','cart.id as cart_id')
+        ->sum('products.price');
+        
+         return view('ordernow',['total1'=>$total]);
+    }
+
+    function orderplace(Request $req)
+    {   $data=   session()->get('user');
+        $userId=$data->id;
+       $allCart= Cart:: where('user_id',$userId)->get();
+       foreach($allCart as $cart)
+       {
+        $order=new order();
+        $order->product_id=$cart['product_id'];
+        $order->user_id=$cart['user_id'];
+        $order->status="pending";
+        $order->payment_method=$req->payment;
+        $order->address=$req->address;
+        $order->save();
+        Cart:: where('user_id',$userId)->delete();
+        
+
+       }
+        
+       return redirect('/product');
+    }
+
  
  
  
