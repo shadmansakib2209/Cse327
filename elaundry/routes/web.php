@@ -20,3 +20,8 @@ route::post('/login','UserController@login');
 route::get('/signup','UserController@signup');
 route::post('/master',  'UserController@insertregi');
 route::get('/myorders','productController@myorders');
+route::get('/product','productController@index');
+route::get('/details/{id}','productController@detail');
+route::post('/add_to_cart','productController@addToCart');
+route::get('/cartlist','productController@cartlist');
+route::get('/removecart/{id}','productController@removecartitem');
