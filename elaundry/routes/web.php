@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+route::get('/master', function()
+{
+    return view('master');
 });
+ 
+route::post('/login','UserController@login');
+route::get('/signup','UserController@signup');
+route::post('/master',  'UserController@insertregi');
+route::get('/myorders','productController@myorders');
