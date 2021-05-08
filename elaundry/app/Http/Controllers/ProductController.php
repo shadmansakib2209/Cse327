@@ -11,6 +11,22 @@ use App\order;
  
 class ProductController extends Controller
 {
+ 
+   function myorders()
+    {
+        $data=   session()->get('user');
+          $userId=$data->id;
+
+        $orders= DB::table('orders')->join('products','orders.product_id','=','products.id')
+        ->where('orders.user_id',$userId) 
+        ->get();
+        return view('/myorders',['orders'=>$orders]);
+    }
+ 
+ 
+ 
+ 
+ 
     
     function index()
     {
