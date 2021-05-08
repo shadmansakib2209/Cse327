@@ -28,6 +28,12 @@ class UserController extends Controller
       
     }
     
+     function logout(Request $req)
+    {
+        $req->session()->forget('user');
+        return redirect('/master');
+    }
+
 
     function signup()
     {    
